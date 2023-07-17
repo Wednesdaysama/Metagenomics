@@ -9,7 +9,7 @@ Download the target files to your own directory. Unzip all the .gz files in Linu
 Save all the .fastq files, which are the input files of [Metaamp](http://ebg.ucalgary.ca/metaamp/index.asc.html).
 ## 2. Preparation of Metaamp
 There are 3 files need to be prepared before running Metaamp online. 
-1. a mapping text file. Please click ![here](D:/Pycharm/project/Screenshot 2023-07-15 210733.png) for details.
+1. a mapping text file.
 2. a compressed .fastq file (.zip)
 3. primers information
 
