@@ -21,6 +21,6 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
     #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
     pwd; hostname; date
 
-    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
     conda activate ~/bio/bin/fastqc_env
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
     fastqc *.gz -o ./out_put --svg --noextract -t 16
