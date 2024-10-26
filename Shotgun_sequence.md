@@ -8,3 +8,10 @@ PS: The original data of 2024 August was saved in /work/ebg_lab/eb/Lianchun/shot
     conda install -c bioconda fastqc
     fastqc -h  
 Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) for FastQC documentation.
+
+##### 1.2 Command line
+
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/
+    conda activate ~/bio/bin/fastqc_env
+    fastqc *.gz -o ./out_put --svg
+
