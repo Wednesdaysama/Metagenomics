@@ -24,3 +24,6 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
     conda activate ~/bio/bin/fastqc_env
     cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
     fastqc *.gz -o ./out_put --svg --noextract -t 16
+
+Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
+
