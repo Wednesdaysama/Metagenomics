@@ -1,5 +1,3 @@
-PS: The original data of 2024 August was saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
-
 #### 1. read quality control - FastQC
 ##### 1.1 FastQC Installation
 
