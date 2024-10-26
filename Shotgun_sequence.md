@@ -7,7 +7,7 @@
     fastqc -h  
 Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) for FastQC documentation.
 
-##### 1.2 Command line
+##### 1.2 Slurm
 
     #!/bin/bash
     #SBATCH --job-name=fastqc      # Job name
