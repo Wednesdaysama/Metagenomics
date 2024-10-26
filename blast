@@ -1,4 +1,0 @@
-To find a specific protein sequence from a designed faa file:
-blastp -query bicar_trans_seq_uniprot.fasta -subject Phormidium_alkaliphilum.faa -out alk_bica.txt -outfmt "6 qseqid sseqid pident"
-bicar_trans_seq_uniprot.fasta contained the specific protein sequences, which can be download from [uniprot](https://www.uniprot.org/) for example.
-Phormidium_alkaliphilum.faa is the designed file, which may conatain the whole protein sequence of one species.
