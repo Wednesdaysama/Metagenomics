@@ -84,9 +84,33 @@ Check BBMap installation
          bbmerge.sh in1=norm_${i}_R1_001.fastq.gz in2=norm_${i}_R2_001.fastq.gz out=merged_norm_${i}.fastq.gz outu1=unmerged_norm_${i}_R1.fastq.gz outu2=unmerged_norm_${i}_R2.fastq.gz ihist=ihi$
     done
 
+#### 4. Metagenomic assembly - MetaSPAdes or Megahit
+##### 4.1 Installation
+**MetaSPAdes** is a module in SPAde. The steps for installing the SPAde are shown here.
 
-#### *. Per-contig sequencing coverage estimation - BBMap / MetaBat
-##### Installation
+    wget https://github.com/ablab/spades/releases/download/v4.0.0/SPAdes-4.0.0-Linux.tar.gz
+    tar -xzf SPAdes-4.0.0-Linux.tar.gz
+    rm SPAdes-4.0.0-Linux.tar.gz
+    nano ~/.bashrc # export PATH=$PATH:/home/lianchun.yi1/software/SPAdes-4.0.0-Linux/bin
+    source ~/bio/bin/3.10_python-env/bin/activate # minimal supported python version is 3.8
+    spades.py --test
+
+**Megahit**
+
+    conda install -c bioconda megahit
+    megahit --version
+
+##### 4.4 Slurm
+**metaSPAdes.slurm**
+**megahit.slurm**
+
+#### 5. Annotaion - Metaerg
+##### 5.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
+##### 5.2 Slurm - metaerg.slurm
+
+#### 6. Per-contig sequencing coverage estimation - BBMap / MetaBat
+##### 6.1 Installation
+**BBMap**
     
     wget https://sourceforge.net/projects/bbmap/files/BBMap_39.10.tar.gz/download -O BBMap.tar.gz
     tar -xvzf BBMap.tar.gz
@@ -97,15 +121,21 @@ Check BBMap installation
 
 Once BBMap is installed, we can directly use **BBNorm** for read normalization or **BBMerge** for merging overlapping reads. 
 
-#### *. Metagenomic assembly - MetaSPAdes or Megahit
+**MetaBat**
 
-#### *. Binning - MetaBat 
+##### 6.2 Slurm
+
+
+#### 7. Binning - MetaBat 
+
+#### 8. Contamination and completeness checking - CheckM2
+
 
 ## overview
 1. read quality fastqc software to visualize the data?
 2. BBmap, count K-mer count 30-70 long,  show reads for assembly
 3. metahit for assembly, look at the N50 value, plot the distribution with contig length, remove < 1000 bp.
-4. put 10 samples together and assemble them together, 0.1%. kit type? Next seq 2000
+4. put 10 samples together and assemble them together, 0.1%. kit type? Nextseq 2000
 5. BBmap again, give a file that each the contig what is their depth
 6. metabat2/3 to bin the data into mags
 7. checkm2 to get the quality of the bins
