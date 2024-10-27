@@ -28,9 +28,9 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
 Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
 
 ### 2. Reads coverage-normalization
-##### installation
+##### 2.1 Installation
 Check BBMap installation
-##### Slurm - bbnorm.slurm
+##### 2.2 Slurm - bbnorm.slurm
 
     #!/bin/bash
     #SBATCH --job-name=bbnorm      # Job name
@@ -48,7 +48,7 @@ Check BBMap installation
 
     bbnorm.sh in1=Li49158-LY-2024Aug-SedTrip2_S7_R1_001.fastq.gz in2=Li49158-LY-2024Aug-SedTrip2_S7_R2_001.fastq.gz \ out1=norm_Li49158-LY-2024Aug-SedTrip2_S7_R1_001.fastq.gz out2=norm_Li49158-LY-2024Aug-SedTrip2_S7_R2_001.fastq.gz \ target=100 min=4
 
-
+Running BBnorm with explicit file names for paired-end reads. Since we have 10 pairs of files, we need to run the bbnorm.sh command for each pair. 
 
 #### *. Per-contig sequencing coverage estimation - BBMap / MetaBat
 ##### Installation
