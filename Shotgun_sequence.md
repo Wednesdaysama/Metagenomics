@@ -39,7 +39,7 @@ Check BBMap installation
     #SBATCH --ntasks=1            # Run 1 tasks
     #SBATCH --cpus-per-task=16    # Number of CPU cores per task
     #SBATCH --mem=50G            # Job memory request
-    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends x min
+    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends 5 hours
     #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
     #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
     pwd; hostname; date
@@ -49,6 +49,8 @@ Check BBMap installation
     bbnorm.sh in1=Li49158-LY-2024Aug-SedTrip2_S7_R1_001.fastq.gz in2=Li49158-LY-2024Aug-SedTrip2_S7_R2_001.fastq.gz \ out1=norm_Li49158-LY-2024Aug-SedTrip2_S7_R1_001.fastq.gz out2=norm_Li49158-LY-2024Aug-SedTrip2_S7_R2_001.fastq.gz \ target=100 min=4
 
 Running BBnorm with explicit file names for paired-end reads. Since we have 10 pairs of files, we need to run the bbnorm.sh command for each pair. 
+
+#### 
 
 #### *. Per-contig sequencing coverage estimation - BBMap / MetaBat
 ##### Installation
