@@ -81,7 +81,7 @@ Check BBMap installation
              Li49165-LY-2024Aug-MatSite7_S14 \
              Li49166-LY-2024Aug-MatSite8_S15
     do
-        bbmerge.sh in1=norm_${i}_R1_001.fastq.gz in2=norm_${i}_R2_001.fastq.gz    out1=merged_${i}_R1.fastq.gz out2=merged_${i}_R2.fastq.gz loose=t
+        bbmerge.sh in1=norm_${i}_R1_001.fastq.gz in2=norm_${i}_R2_001.fastq.gz out1=merged_${i}_R1.fastq.gz out2=merged_${i}_R2.fastq.gz loose=t
     done
 
 
