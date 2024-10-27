@@ -50,7 +50,40 @@ Check BBMap installation
 
 Running BBnorm with explicit file names for paired-end reads. Since we have 10 pairs of files, we need to run the bbnorm.sh command for each pair. 
 
-#### 
+#### 3. Merging overlapping reads - BBMerge
+##### 3.1 Installation
+Check BBMap installation
+
+##### 3.2 Slurm - bbmerge.slurm
+
+    #!/bin/bash
+    #SBATCH --job-name=bbmerge      # Job name
+    #SBATCH --output=%x.log  # Job's standard output and error log
+    #SBATCH --nodes=1             # Run all processes on a single node
+    #SBATCH --ntasks=1            # Run 1 tasks
+    #SBATCH --cpus-per-task=16    # Number of CPU cores per task
+    #SBATCH --mem=50G            # Job memory request
+    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends x hours
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
+    #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
+    pwd; hostname; date
+
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
+
+    for i in Li49157-LY-2024Aug-SedTrip1_S6 \
+             Li49158-LY-2024Aug-SedTrip2_S7 \
+             Li49159-LY-2024Aug-SedTrip3_S8 \
+             Li49160-LY-2024Aug-MatSite1_S9 \
+             Li49161-LY-2024Aug-MatSite3_S10 \
+             Li49162-LY-2024Aug-MatSite4_S11 \
+             Li49163-LY-2024Aug-MatSite5_S12 \
+             Li49164-LY-2024Aug-MatSite6_S13 \
+             Li49165-LY-2024Aug-MatSite7_S14 \
+             Li49166-LY-2024Aug-MatSite8_S15
+    do
+        bbmerge.sh in1=norm_${i}_R1_001.fastq.gz in2=norm_${i}_R2_001.fastq.gz    out1=merged_${i}_R1.fastq.gz out2=merged_${i}_R2.fastq.gz loose=t
+    done
+
 
 #### *. Per-contig sequencing coverage estimation - BBMap / MetaBat
 ##### Installation
