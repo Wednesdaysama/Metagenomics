@@ -108,7 +108,7 @@ Check BBMap installation
 ##### 5.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
 ##### 5.2 Slurm - metaerg.slurm
 
-#### 6. Per-contig sequencing coverage estimation - BBMap / MetaBat
+#### 6. Per-contig sequencing coverage estimation - BBMap / MetaBat2
 ##### 6.1 Installation
 **BBMap**
     
@@ -121,12 +121,15 @@ Check BBMap installation
 
 Once BBMap is installed, we can directly use **BBNorm** for read normalization or **BBMerge** for merging overlapping reads. 
 
-**MetaBat**
+**MetaBat2**
+
+
+    
 
 ##### 6.2 Slurm
 
 
-#### 7. Binning - MetaBat 
+#### 7. Binning - MetaBat2 
 
 #### 8. Contamination and completeness checking - CheckM2
 
