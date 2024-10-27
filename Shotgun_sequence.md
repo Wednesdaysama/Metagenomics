@@ -161,7 +161,7 @@ Check BBMap installation
     "merged_norm_Li49161-LY-2024Aug-MatSite3_S10.fastq.gz" "merged_norm_Li49162-LY-2024Aug-MatSite4_S11.fastq.gz"
     "merged_norm_Li49163-LY-2024Aug-MatSite5_S12.fastq.gz" "merged_norm_Li49164-LY-2024Aug-MatSite6_S13.fastq.gz"
     "merged_norm_Li49165-LY-2024Aug-MatSite7_S14.fastq.gz" "merged_norm_Li49166-LY-2024Aug-MatSite8_S15.fastq.gz"
-)
+    )
 
     main_output_dir="./metaspades_assembly"
 
