@@ -27,7 +27,7 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
 
 Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
 
-### 2. Reads coverage-normalization
+#### 2. Reads coverage-normalization
 ##### 2.1 Installation
 Check BBMap installation
 ##### 2.2 Slurm - bbnorm.slurm
