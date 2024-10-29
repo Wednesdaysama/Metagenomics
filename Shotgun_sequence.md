@@ -135,7 +135,7 @@ Check BBMap installation
         output_dir="$main_output_dir/${sample}_separate_unmerged"
         mkdir -p "$output_dir"
 
-        spades.py --meta -1 $R1 -2 $R2 -o $output_dir --threads 16
+        spades.py --meta -1 $R1 -2 $R2 -o $output_dir --threads 32
 
     done
 
@@ -171,7 +171,7 @@ Check BBMap installation
         sample_output_dir="$main_output_dir/${sample_name}_separate_merged"
         mkdir -p "$sample_output_dir"
 
-        spades.py --meta -s "$file" -o "$sample_output_dir" --threads 16
+        spades.py --meta -s "$file" -o "$sample_output_dir" --threads 32
 
         echo "MetaSPAdes separate_merged completed for $sample_name"
     done
