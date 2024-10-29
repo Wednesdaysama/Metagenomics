@@ -108,9 +108,9 @@ Check BBMap installation
     #SBATCH --output=%x.log  # Job's standard output and error log
     #SBATCH --nodes=1             # Run all processes on a single node
     #SBATCH --ntasks=1            # Run 1 tasks
-    #SBATCH --cpus-per-task=16    # Number of CPU cores per task
-    #SBATCH --mem=50G            # Job memory request
-    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends 4 hours
+    #SBATCH --cpus-per-task=32    # Number of CPU cores per task
+    #SBATCH --mem=100G            # Job memory request
+    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends x hours
     #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
     #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
     pwd; hostname; date
@@ -146,9 +146,9 @@ Check BBMap installation
     #SBATCH --output=%x.log  # Job's standard output and error log
     #SBATCH --nodes=1             # Run all processes on a single node
     #SBATCH --ntasks=1            # Run 1 tasks
-    #SBATCH --cpus-per-task=16    # Number of CPU cores per task
-    #SBATCH --mem=50G            # Job memory request
-    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends 4 hours
+    #SBATCH --cpus-per-task=32    # Number of CPU cores per task
+    #SBATCH --mem=100G            # Job memory request
+    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends 13 hours
     #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
     #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
     pwd; hostname; date
