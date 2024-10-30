@@ -50,6 +50,35 @@ Check BBMap installation
 
 The output file name is Li491xx_**trimmed**_Rx.fastq.gz.
 
+##### 2.2 Slurm - clip.slurm
+
+    #!/bin/bash
+    #SBATCH --job-name=BBduk_clip      # Job name
+    #SBATCH --output=%x.log  # Job's standard output and error log
+    #SBATCH --nodes=1             # Run all processes on a single node
+    #SBATCH --ntasks=1            # Run 1 tasks
+    #SBATCH --cpus-per-task=32    # Number of CPU cores per task
+    #SBATCH --mem=50G            # Job memory request
+    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends 40 min
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
+    #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
+    pwd; hostname; date
+
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
+
+    for sample in Li49157 Li49158 Li49159 Li49160 Li49161 Li49162 Li49163 Li49164 Li49165 Li49166
+    do
+        bbduk.sh \
+            in1=${sample}_trimmed_R1.fastq.gz \
+            in2=${sample}_trimmed_R2.fastq.gz \
+            out1=${sample}_clip_R1.fastq.gz \
+            out2=${sample}_clip_R2.fastq.gz \
+            tbo tpe k=23 mink=11 hdist=1 ktrim=r t=32
+    done
+
+The name of the output file is Li491xx_**clip**_Rx.fastq.gz.
+
+
 #### 4. Metagenomic assembly - MetaSPAdes or [Megahit](https://github.com/voutcn/megahit)
 ##### 4.1 Installation
 **MetaSPAdes** is a module in SPAde. The steps for installing the SPAde are shown here.
