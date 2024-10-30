@@ -1,4 +1,4 @@
-#### 1. read quality control - FastQC
+#### 1. Reads quality control report - FastQC
 ##### 1.1 FastQC Installation
 
     conda create --prefix ~/bio/bin/fastqc_env
