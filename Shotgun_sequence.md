@@ -27,7 +27,7 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
 
 Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
 
-#### 2. Raw reads filtration - BBduk
+#### 2. Raw reads filtration - [BBduk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/)
 ##### 2.1 Installation
 Check BBMap installation
 ##### 2.1 Slurm - ftm.slurm
@@ -49,7 +49,7 @@ Check BBMap installation
     bbduk.sh in1=Li49157-LY-2024Aug-SedTrip1_S6_R1_001.fastq.gz in2=Li49157-LY-2024Aug-SedTrip1_S6_R2_001.fastq.gz out1=Li49157_trimmed_R1.fastq.gz out2=Li49157_trimmed_R2.fastq.gz ftm=5 t=32
 
 
-#### 4. Metagenomic assembly - MetaSPAdes or Megahit
+#### 4. Metagenomic assembly - MetaSPAdes or [Megahit](https://github.com/voutcn/megahit)
 ##### 4.1 Installation
 **MetaSPAdes** is a module in SPAde. The steps for installing the SPAde are shown here.
 
