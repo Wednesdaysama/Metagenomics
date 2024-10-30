@@ -48,6 +48,7 @@ Check BBMap installation
 
     bbduk.sh in1=Li49157-LY-2024Aug-SedTrip1_S6_R1_001.fastq.gz in2=Li49157-LY-2024Aug-SedTrip1_S6_R2_001.fastq.gz out1=Li49157_trimmed_R1.fastq.gz out2=Li49157_trimmed_R2.fastq.gz ftm=5 t=32
 
+The output file name is Li491xx_**trimmed**_Rx.fastq.gz.
 
 #### 4. Metagenomic assembly - MetaSPAdes or [Megahit](https://github.com/voutcn/megahit)
 ##### 4.1 Installation
