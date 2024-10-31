@@ -221,13 +221,14 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 #### 5. Per-contig sequencing coverage estimation - BBMap / MetaBat2
 ##### 5.1 Installation
 
-
 **MetaBat2**
 
 
     
 
 ##### 5.2 Slurm
+
+
 
 
 #### 6. Binning - MetaBat2 
