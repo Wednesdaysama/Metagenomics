@@ -190,6 +190,30 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 
 **megahit.slurm**
 
+    #!/bin/bash
+    #SBATCH --job-name=megahit_sperate      # Job name
+    #SBATCH --output=%x.log  # Job's standard output and error log
+    #SBATCH --nodes=1             # Run all processes on a single node
+    #SBATCH --ntasks=1            # Run 1 tasks
+    #SBATCH --cpus-per-task=32    # Number of CPU cores per task
+    #SBATCH --mem=50G            # Job memory request
+    #SBATCH --time=48:00:00       # processing 20 paired-end Illumina reads spends x h
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
+    #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
+    pwd; hostname; date
+
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
+    module load megahit/1.2.9
+
+    gunzip *_clean_R1.fastq.gz
+    gunzip *_clean_R2.fastq.gz
+
+    for i in {57..66}; do
+        SAMPLE="Li491${i}"
+        megahit -1 ${SAMPLE}_clean_R1.fastq -2 ${SAMPLE}_clean_R2.fastq -o ./megahit_assembly/seperate/${SAMPLE}_output -t 32
+    done
+
+
 #### 4. Annotaion - Metaerg
 ##### 4.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
 ##### 4.2 Slurm - metaerg.slurm
