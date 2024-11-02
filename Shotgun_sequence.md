@@ -1,3 +1,7 @@
+#### 0. Launch an interactive session on ARC
+
+    salloc --mem=20G -c 1 -N 1 -n 1  -t 04:00:00
+
 #### 1. Reads quality control report - FastQC
 ##### 1.1 FastQC Installation
 
