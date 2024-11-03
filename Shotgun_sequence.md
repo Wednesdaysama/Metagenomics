@@ -230,10 +230,9 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
     done
 
 The output contig file *final.contigs.fa* is in ./megahit_assembly/separate/Li491xx_output. Metaerg prefer to accept one ".".
-Change the name of the contigs accordingly and move them to ./shotgun_2024Aug.
+Change the name of the contigs accordingly (Li491xx.fa) and move them to ./shotgun_2024Aug.
 
 **megahit_co-assemble.slurm**
-
 
 
 
@@ -280,9 +279,21 @@ Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
 <details>
 <summary>
 
-#### 5. Per contig sequencing depth - BBMap / MetaBat2  </summary>
-##### 5.1 Installation
-**MetaBat2**
+#### 5. Remove contigs that less than 500bp </summary>
+
+    source ~/bio/bin/3.10_python-env/bin/activate
+    python remove_short_contigs.py
+    rm Li*.fa
+
+Keep the filtered_Li491*.fa files for further analysis.
+
+</details>
+
+<details>
+<summary>
+
+#### 6. Per contig sequencing depth - BBMap / MetaBat2  </summary>
+**MetaBat2** Installation
 
     mamba create --name metabat2
     mamba activate metabat2
