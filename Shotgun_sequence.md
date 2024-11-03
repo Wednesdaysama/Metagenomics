@@ -217,7 +217,7 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
         megahit -1 ${SAMPLE}_clean_R1.fastq -2 ${SAMPLE}_clean_R2.fastq -o ./megahit_assembly/separate/${SAMPLE}_output -t 32 --continue
     done
 
-The output contig file *final.contigs.fa* is in ./megahit_assembly/separate/Li491xx_output.
+The output contig file *final.contigs.fa* is in ./megahit_assembly/separate/Li491xx_output. Metaerg prefer to accept one ".".
 
 **megahit_co-assemble.slurm**
 
@@ -259,6 +259,12 @@ Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
 #### 5. Annotaion - Metaerg
 ##### 5.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
 ##### 5.2 Slurm - metaerg.slurm
+Make a metaerg directory under shotgun_2024Aug. Replace all ./megahit_assembly/separate/Li491xx_output/*final.contigs.fa* names with *Li491xx.fa*. And move them to ./metaerg. 
+
+
+
+
+
 
 #### 6. Per-contig sequencing coverage estimation - BBMap / MetaBat2
 ##### 6.1 Installation
