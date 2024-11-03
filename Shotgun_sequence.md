@@ -250,7 +250,7 @@ Change the name of the contigs accordingly (Li491xx.fa) and move them to ./shotg
     module load megahit/1.2.9
 
     megahit -1  Li49157_clean_R1.fastq,Li49158_clean_R1.fastq,Li49159_clean_R1.fastq,Li49160_clean_R1.fastq,Li49161_clean_R1.fastq,Li49162_clean_R1.fastq,Li49163_clean_R1.fastq,Li49164_clean_R1.fastq,Li49165_clean_R1.fastq,Li49166_clean_R1.fastq \
-            -2     Li49157_clean_R2.fastq,Li49158_clean_R2.fastq,Li49159_clean_R2.fastq,Li49160_clean_R2.fastq,Li49161_clean_R2.fastq,Li49162_clean_R2.fastq,Li49163_clean_R2.fastq,Li49164_clean_R2.fastq,Li49165_clean_R2.fastq,Li49166_clean_R2.fastq \
+            -2 Li49157_clean_R2.fastq,Li49158_clean_R2.fastq,Li49159_clean_R2.fastq,Li49160_clean_R2.fastq,Li49161_clean_R2.fastq,Li49162_clean_R2.fastq,Li49163_clean_R2.fastq,Li49164_clean_R2.fastq,Li49165_clean_R2.fastq,Li49166_clean_R2.fastq \
             -o ./megahit_assembly/co-assemble  -t 32
 
 
