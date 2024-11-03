@@ -192,7 +192,7 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
         spades.py --meta -1 $R1 -2 $R2 -o $output_dir --threads 32
     done
 
-**megahit.slurm**
+**megahit_separate.slurm**
 
     #!/bin/bash
     #SBATCH --job-name=megahit_sperate      # Job name
@@ -201,7 +201,7 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
     #SBATCH --ntasks=1            # Run 1 tasks
     #SBATCH --cpus-per-task=32    # Number of CPU cores per task
     #SBATCH --mem=50G            # Job memory request
-    #SBATCH --time=48:00:00       # processing 20 paired-end Illumina reads spends x h
+    #SBATCH --time=100:00:00       # processing 20 paired-end Illumina reads spends 3 days
     #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
     #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
     pwd; hostname; date
@@ -214,29 +214,66 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 
     for i in {57..66}; do
         SAMPLE="Li491${i}"
-        megahit -1 ${SAMPLE}_clean_R1.fastq -2 ${SAMPLE}_clean_R2.fastq -o ./megahit_assembly/seperate/${SAMPLE}_output -t 32
+        megahit -1 ${SAMPLE}_clean_R1.fastq -2 ${SAMPLE}_clean_R2.fastq -o ./megahit_assembly/separate/${SAMPLE}_output -t 32 --continue
     done
 
+The output contig file *final.contigs.fa* is in ./megahit_assembly/separate/Li491xx_output.
 
-#### 4. Annotaion - Metaerg
-##### 4.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
-##### 4.2 Slurm - metaerg.slurm
+**megahit_co-assemble.slurm**
 
-#### 5. Per-contig sequencing coverage estimation - BBMap / MetaBat2
-##### 5.1 Installation
+
+#### 4. K-mer coverage - BBMap
+##### 4.1 Installation
+Please refer to BBMap
+##### 4.2 Slurm
+**kmercoverage.slurm**
+
+    #!/bin/bash
+    #SBATCH --job-name=kmercoverage     # Job name
+    #SBATCH --output=%x.log  # Job's standard output and error log
+    #SBATCH --nodes=1             # Run all processes on a single node
+    #SBATCH --ntasks=1            # Run 1 tasks
+    #SBATCH --cpus-per-task=32    # Number of CPU cores per task
+    #SBATCH --mem=50G            # Job memory request
+    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends 13 h
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
+    #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
+    pwd; hostname; date
+
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
+
+    for r1_file in *R1.fastq; do
+        r2_file="${r1_file/_R1/_R2}"
+        paired_output_r1="${r1_file/_R1.fastq/_paired_R1.fastq}"
+        paired_output_r2="${r1_file/_R1.fastq/_paired_R2.fastq}"
+        repair.sh in1="${r1_file}" in2="${r2_file}" out1="${paired_output_r1}" out2="${paired_output_r2}"
+    done
+
+    for i in {49157..49166}; do
+        kmercoverage.sh in=Li${i}_clean_paired_R1.fastq in2=Li${i}_clean_paired_R2.fastq \
+        out=Li${i}_kmer.fastq hist=Li${i}_hist.txt
+    done
+
+Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
+
+#### 5. Annotaion - Metaerg
+##### 5.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
+##### 5.2 Slurm - metaerg.slurm
+
+#### 6. Per-contig sequencing coverage estimation - BBMap / MetaBat2
+##### 6.1 Installation
 
 **MetaBat2**
 
 
     
-
-##### 5.2 Slurm
-
+##### 6.2 Slurm
 
 
 
-#### 6. Binning - MetaBat2 
 
-#### 7. Contamination and completeness checking - CheckM2
+#### 7. Binning - MetaBat2 
+
+#### 8. Contamination and completeness checking - CheckM2
 
 
