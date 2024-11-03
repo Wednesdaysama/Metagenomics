@@ -320,11 +320,39 @@ Keep the filtered_Li491*.fa files for further analysis.
     
 **bbmap.slurm**
 
+    #!/bin/bash
+    #SBATCH --job-name=bbmap     # Job name
+    #SBATCH --output=%x.log  # Job's standard output and error log
+    #SBATCH --nodes=1             # Run all processes on a single node
+    #SBATCH --ntasks=1            # Run 1 tasks
+    #SBATCH --cpus-per-task=32    # Number of CPU cores per task
+    #SBATCH --mem=150G            # Job memory request
+    #SBATCH --time=24:00:00       # processing 20 paired-end Illumina reads spends 17 h
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
+    #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
+    pwd; hostname; date
+
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
+
+    references=("filtered_Li49157.fa" "filtered_Li49158.fa" "filtered_Li49159.fa" "filtered_Li49160.fa" "filtered_Li49161.fa" "filtered_Li49162.fa" "filtered_Li49163.fa" "filtered_Li49164.fa" "filtered_Li49165.fa" "filtered_Li49166.fa")
+    reads_R1=("Li49158_clean_R1.fastq" "Li49159_clean_R1.fastq" "Li49160_clean_R1.fastq" "Li49161_clean_R1.fastq" "Li49162_clean_R1.fastq" "Li49163_clean_R1.fastq" "Li49164_clean_R1.fastq" "Li49165_clean_R1.fastq" "Li49166_clean_R1.fastq" "Li49157_clean_R1.fastq")
+    reads_R2=("Li49158_clean_R2.fastq" "Li49159_clean_R2.fastq" "Li49160_clean_R2.fastq" "Li49161_clean_R2.fastq" "Li49162_clean_R2.fastq" "Li49163_clean_R2.fastq" "Li49164_clean_R2.fastq" "Li49165_clean_R2.fastq" "Li49166_clean_R2.fastq" "Li49157_clean_R2.fastq")
+
+    for i in ${!references[@]}; do
+        ref=${references[$i]}
+        r1=${reads_R1[$i]}
+        r2=${reads_R2[$i]}
+
+        out_file="mapped_${ref%.fa}.sam"
     
+        bbmap.sh ref="$ref" in1="$r1" in2="$r2" out="$out_file" minid=0.99 nodisk=f threads=32
+    
+        coverage_file="coverage_${ref%.fa}.txt"
+        pileup.sh in="$out_file" out="$coverage_file"
+    done
 
 
-
-
+The name of the output files are **mapped_filtered_Li491xx.sam** and **coverage_filtered_Li491xx.txt** for contig sequencing depth.
 
 
 </details>
@@ -335,7 +363,7 @@ Keep the filtered_Li491*.fa files for further analysis.
     
 
 
-#### 7. Binning - MetaBat2 
+#### 7. Binning - MetaBat2 </summary>
 
 
 <details>
