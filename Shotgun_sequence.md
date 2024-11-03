@@ -282,10 +282,12 @@ Make a metaerg directory under shotgun_2024Aug. Replace all ./megahit_assembly/s
 
 #### 6. Per-contig sequencing coverage estimation - BBMap / MetaBat2
 ##### 6.1 Installation
-
 **MetaBat2**
 
-
+    mamba create --name metabat2
+    mamba activate metabat2
+    mamba install metabat2
+    mamba update metabat2
     
 ##### 6.2 Slurm
 
