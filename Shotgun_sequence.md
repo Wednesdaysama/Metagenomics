@@ -241,6 +241,7 @@ Change the name of the contigs accordingly and move them to ./shotgun_2024Aug.
 
 <details>
 <summary>
+    
 #### 4. K-mer coverage - BBMap </summary>
 ##### 4.1 Installation
 Please refer to BBMap
