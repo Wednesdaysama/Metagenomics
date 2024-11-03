@@ -218,6 +218,7 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
     done
 
 The output contig file *final.contigs.fa* is in ./megahit_assembly/separate/Li491xx_output. Metaerg prefer to accept one ".".
+Change the name of the contigs accordingly and move them to ./contigs.
 
 **megahit_co-assemble.slurm**
 
