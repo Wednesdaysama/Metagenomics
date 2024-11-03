@@ -2,7 +2,10 @@
 
     salloc --mem=20G -c 1 -N 1 -n 1  -t 04:00:00
 
-#### 1. Reads quality control report - FastQC
+<details>
+<summary>
+    
+#### 1. Reads quality control report - FastQC </summary>
 ##### 1.1 FastQC Installation
 
     conda create --prefix ~/bio/bin/fastqc_env
@@ -30,8 +33,12 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
     fastqc *.gz -o ./out_put --svg --noextract -t 16 -k
 
 Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
+</details>
 
-#### 2. Raw reads filtration - [BBduk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/)
+<details>
+<summary>
+
+#### 2. Raw reads filtration - [BBduk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) </summary>
 ##### 2.1 Installation
 **BBMap**
     
@@ -141,7 +148,12 @@ Keep the output files whose names are Li491xx_**unmached**_Rx.fastq.gz.
 
 The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 
-#### 3. Metagenomic assembly - MetaSPAdes or [Megahit](https://github.com/voutcn/megahit)
+</details>
+
+<details>
+<summary>
+
+#### 3. Metagenomic assembly - MetaSPAdes or [Megahit](https://github.com/voutcn/megahit)</summary>
 ##### 3.1 Installation
 **MetaSPAdes** is a module in SPAde. The steps for installing the SPAde are shown here.
 
@@ -223,7 +235,13 @@ Change the name of the contigs accordingly and move them to ./shotgun_2024Aug.
 **megahit_co-assemble.slurm**
 
 
-#### 4. K-mer coverage - BBMap
+
+
+</details>
+
+<details>
+<summary>
+#### 4. K-mer coverage - BBMap </summary>
 ##### 4.1 Installation
 Please refer to BBMap
 ##### 4.2 Slurm
@@ -256,9 +274,20 @@ Please refer to BBMap
     done
 
 Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
+</details>
 
+<details>
+<summary>
 
-#### 5. Per contig sequencing depth - BBMap
+#### 5. Per contig sequencing depth - BBMap / MetaBat2  </summary>
+##### 5.1 Installation
+**MetaBat2**
+
+    mamba create --name metabat2
+    mamba activate metabat2
+    mamba install metabat2
+    mamba update metabat2
+    
 **bbmap.slurm**
 
     
@@ -268,33 +297,27 @@ Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
 
 
 
+</details>
 
 
-#### 5. Annotaion - Metaerg
+<details>
+<summary>
+    
+
+
+#### 7. Binning - MetaBat2 
+
+
+<details>
+<summary>
+
+#### 5. Annotaion - Metaerg </summary>
 ##### 5.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
 ##### 5.2 Slurm - metaerg.slurm
 Make a metaerg directory under shotgun_2024Aug. Replace all ./megahit_assembly/separate/Li491xx_output/*final.contigs.fa* names with *Li491xx.fa*. And move them to ./metaerg. 
 
 
-
-
-
-
-#### 6. Per-contig sequencing coverage estimation - BBMap / MetaBat2
-##### 6.1 Installation
-**MetaBat2**
-
-    mamba create --name metabat2
-    mamba activate metabat2
-    mamba install metabat2
-    mamba update metabat2
-    
-##### 6.2 Slurm
-
-
-
-
-#### 7. Binning - MetaBat2 
+</details>
 
 #### 8. Contamination and completeness checking - CheckM2
 
