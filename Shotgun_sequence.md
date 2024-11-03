@@ -279,7 +279,7 @@ Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
 <details>
 <summary>
 
-#### 5. Remove contigs that less than 500bp </summary>
+#### 5. Remove contigs that less than 500bp - remove_short_contigs.py </summary>
 
     source ~/bio/bin/3.10_python-env/bin/activate
     python remove_short_contigs.py
