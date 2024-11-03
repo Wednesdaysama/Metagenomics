@@ -234,6 +234,24 @@ Change the name of the contigs accordingly (Li491xx.fa) and move them to ./shotg
 
 **megahit_co-assemble.slurm**
 
+    #!/bin/bash
+    #SBATCH --job-name=megahit_co-assemble      # Job name
+    #SBATCH --output=%x.log  # Job's standard output and error log
+    #SBATCH --nodes=1             # Run all processes on a single node
+    #SBATCH --ntasks=1            # Run 1 tasks
+    #SBATCH --cpus-per-task=32    # Number of CPU cores per task
+    #SBATCH --mem=300G            # Job memory request
+    #SBATCH --time=168:00:00       # processing 20 paired-end Illumina reads spends 64 h
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca  # Send the job information to this email
+    #SBATCH --mail-type=ALL                       # Send the type: <BEGIN><FAIL><END>
+    pwd; hostname; date
+    
+    cd /work/ebg_lab/eb/Lianchun/shotgun_2024Aug
+    module load megahit/1.2.9
+
+    megahit -1  Li49157_clean_R1.fastq,Li49158_clean_R1.fastq,Li49159_clean_R1.fastq,Li49160_clean_R1.fastq,Li49161_clean_R1.fastq,Li49162_clean_R1.fastq,Li49163_clean_R1.fastq,Li49164_clean_R1.fastq,Li49165_clean_R1.fastq,Li49166_clean_R1.fastq \
+            -2     Li49157_clean_R2.fastq,Li49158_clean_R2.fastq,Li49159_clean_R2.fastq,Li49160_clean_R2.fastq,Li49161_clean_R2.fastq,Li49162_clean_R2.fastq,Li49163_clean_R2.fastq,Li49164_clean_R2.fastq,Li49165_clean_R2.fastq,Li49166_clean_R2.fastq \
+            -o ./megahit_assembly/co-assemble  -t 32
 
 
 </details>
