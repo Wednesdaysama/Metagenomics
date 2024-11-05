@@ -292,6 +292,10 @@ Please refer to BBMap
     done
 
 Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
+
+##### 4.3 Plot
+change the Li491xx_hist.txt files accordingly, download to local and run K-mer_coverage.py.
+
 </details>
 
 <details>
@@ -353,7 +357,7 @@ Keep the filtered_Li491*.fa files for further analysis.
 
 
 The name of the output files are **mapped_filtered_Li491xx.sam** and **coverage_filtered_Li491xx.txt** for contig sequencing depth.
-
+Change the coverage_filtered_Li491xx.txt files accordingly, run plot_contig_sequencing_depth.py.
 
 </details>
 
