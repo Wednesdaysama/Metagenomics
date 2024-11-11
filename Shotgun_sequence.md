@@ -35,7 +35,8 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
 Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
 </details>
 
-
+<details>
+<summary>
 
 #### 2. Raw reads filtration - [BBduk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) </summary>
 ##### 2.1 Installation
