@@ -1,4 +1,4 @@
-#### 0. Launch an interactive session on ARC
+#### Launch an interactive session on ARC
 
     salloc --mem=20G -c 1 -N 1 -n 1  -t 04:00:00
 
@@ -35,8 +35,7 @@ Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) fo
 Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
 </details>
 
-<details>
-<summary>
+
 
 #### 2. Raw reads filtration - [BBduk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) </summary>
 ##### 2.1 Installation
@@ -149,6 +148,25 @@ Keep the output files whose names are Li491xx_**unmached**_Rx.fastq.gz.
 The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 
 </details>
+
+<details>
+<summary>
+    
+#### 3. Generating taxonomic results - [sourmash](https://github.com/sourmash-bio/sourmash) </summary>
+##### 3.1 Installation
+
+    mamba create -n sourmash_env -c conda-forge sourmash-minimal
+    mamba activate sourmash_env
+    sourmash --help
+
+##### 3.2 Slurm - sourmash.slurm
+
+    
+</details>
+
+
+
+
 
 <details>
 <summary>
