@@ -6,7 +6,7 @@
 <summary>
     
 #### 1. Reads quality control report - FastQC </summary>
-##### 1.1 FastQC Installation
+##### FastQC Installation
 
     conda create --prefix ~/bio/bin/fastqc_env
     conda activate ~/bio/bin/fastqc_env
@@ -14,7 +14,7 @@
     fastqc -h  
 Check [here](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/Help/) for FastQC documentation.
 
-##### 1.2 Slurm - fastqc.slurm
+##### Slurm - fastqc.slurm
 
     #!/bin/bash
     #SBATCH --job-name=fastqc      # Job name
@@ -39,7 +39,7 @@ Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
 <summary>
 
 #### 2. Raw reads filtration - [BBduk](https://jgi.doe.gov/data-and-tools/software-tools/bbtools/bb-tools-user-guide/bbduk-guide/) </summary>
-##### 2.1 Installation
+##### Installation
 **BBMap**
     
     wget https://sourceforge.net/projects/bbmap/files/BBMap_39.10.tar.gz/download -O BBMap.tar.gz
@@ -51,7 +51,7 @@ Results will be saved in /work/ebg_lab/eb/Lianchun/shotgun_2024Aug/out_put
 
 Once BBMap is installed, we can directly use **BBNorm** for read normalization, **BBMerge** for merging overlapping reads, or **BBduk** for raw reads filtration.
 
-##### 2.1 Slurm - ftm.slurm
+##### Slurm - ftm.slurm
 
     #!/bin/bash
     #SBATCH --job-name=BBduk_ftm      # Job name
@@ -71,7 +71,7 @@ Once BBMap is installed, we can directly use **BBNorm** for read normalization, 
 
 The output file name is Li491xx_**trimmed**_Rx.fastq.gz.
 
-##### 2.2 Slurm - clip.slurm
+##### Slurm - clip.slurm
 
     #!/bin/bash
     #SBATCH --job-name=BBduk_clip      # Job name
@@ -99,7 +99,7 @@ The output file name is Li491xx_**trimmed**_Rx.fastq.gz.
 
 The name of the output file is Li491xx_**clip**_Rx.fastq.gz.
 
-##### 2.3 Slurm - phix.slurm
+##### Slurm - phix.slurm
 
     #!/bin/bash
     #SBATCH --job-name=BBduk_phix      # Job name
@@ -125,7 +125,7 @@ The name of the output file is Li491xx_**clip**_Rx.fastq.gz.
 
 Keep the output files whose names are Li491xx_**unmached**_Rx.fastq.gz.
 
-##### 2.4 Slurm - 3low_clip.slurm
+##### Slurm - 3low_clip.slurm
 
     #!/bin/bash
     #SBATCH --job-name=BBduk_3low_clip      # Job name
@@ -154,26 +154,24 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 <summary>
     
 #### 3. Generating taxonomic results - [sourmash](https://github.com/sourmash-bio/sourmash) </summary>
-##### 3.1 Installation
+##### Installation
 
     mamba create -n sourmash_env -c conda-forge sourmash-minimal
     mamba activate sourmash_env
     sourmash --help
 
-##### 3.2 Slurm - sourmash.slurm
+##### Slurm - sourmash.slurm
 
     
 </details>
 
 
 
-
-
 <details>
 <summary>
 
-#### 3. Metagenomic assembly - MetaSPAdes or [Megahit](https://github.com/voutcn/megahit)</summary>
-##### 3.1 Installation
+#### 4. Metagenomic assembly - MetaSPAdes or [Megahit](https://github.com/voutcn/megahit)</summary>
+##### Installation
 **MetaSPAdes** is a module in SPAde. The steps for installing the SPAde are shown here.
 
     wget https://github.com/ablab/spades/releases/download/v4.0.0/SPAdes-4.0.0-Linux.tar.gz
@@ -188,7 +186,7 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
     conda install -c bioconda megahit
     megahit --version
 
-##### 3.2 Slurm
+##### Slurm
 **metaSPAdes.slurm**
 
     #!/bin/bash
@@ -278,10 +276,10 @@ Change the name of the contigs accordingly (Li491xx.fa) and move them to ./shotg
 <details>
 <summary>
     
-#### 4. K-mer coverage - BBMap </summary>
-##### 4.1 Installation
+#### 5. K-mer coverage - BBMap </summary>
+##### Installation
 Please refer to BBMap
-##### 4.2 Slurm
+##### Slurm
 **kmercoverage.slurm**
 
     #!/bin/bash
@@ -312,7 +310,7 @@ Please refer to BBMap
 
 Check the Li491xx_hist.txt files for Raw_Count and Unique_Kmers.
 
-##### 4.3 Plot
+##### Plot
 change the Li491xx_hist.txt files accordingly, download to local and run K-mer_coverage.py.
 
 </details>
@@ -320,7 +318,7 @@ change the Li491xx_hist.txt files accordingly, download to local and run K-mer_c
 <details>
 <summary>
 
-#### 5. Remove contigs that less than 500bp - remove_short_contigs.py </summary>
+#### 6. Remove contigs that less than 500bp - remove_short_contigs.py </summary>
 
     source ~/bio/bin/3.10_python-env/bin/activate
     python remove_short_contigs.py
@@ -333,7 +331,7 @@ Keep the filtered_Li491*.fa files for further analysis.
 <details>
 <summary>
 
-#### 6. Per contig sequencing depth - BBMap / MetaBat2  </summary>
+#### 7. Per contig sequencing depth - BBMap / MetaBat2  </summary>
 **MetaBat2** Installation
 
     mamba create --name metabat2
@@ -381,25 +379,28 @@ Change the coverage_filtered_Li491xx.txt files accordingly, run plot_contig_sequ
 </details>
 
 
+
 <details>
 <summary>
     
+#### 8. Binning - MetaBat2 </summary>
 
-
-#### 7. Binning - MetaBat2 </summary>
+</details>
 
 
 <details>
 <summary>
 
-#### 5. Annotaion - Metaerg </summary>
-##### 5.1 [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
-##### 5.2 Slurm - metaerg.slurm
+#### 9. Annotaion - Metaerg </summary>
+##### [Installation](https://github.com/Wednesdaysama/evolutionary_adaptation/blob/main/installation.md)
+##### Slurm - metaerg.slurm
 Make a metaerg directory under shotgun_2024Aug. Replace all ./megahit_assembly/separate/Li491xx_output/*final.contigs.fa* names with *Li491xx.fa*. And move them to ./metaerg. 
 
 
 </details>
 
-#### 8. Contamination and completeness checking - CheckM2
+<details>
+<summary>
+#### 10. Contamination and completeness checking - CheckM2
 
-
+</details>
