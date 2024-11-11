@@ -401,6 +401,7 @@ Make a metaerg directory under shotgun_2024Aug. Replace all ./megahit_assembly/s
 
 <details>
 <summary>
+    
 #### 10. Contamination and completeness checking - CheckM2
 
 </details>
