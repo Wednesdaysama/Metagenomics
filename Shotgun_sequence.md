@@ -162,6 +162,60 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 
 ##### Slurm - sourmash.slurm
 
+    #!/bin/bash
+    #SBATCH --job-name=sourmash
+    #SBATCH --output=%x.log
+    #SBATCH --nodes=1
+    #SBATCH --ntasks=1
+    #SBATCH --cpus-per-task=32
+    #SBATCH --mem=50G
+    #SBATCH --time=168:00:00       # processing 20 paired-end Illumina reads spends 2.5 days
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca
+    #SBATCH --mail-type=ALL
+    pwd; hostname; date
+
+    mamba activate sourmash_env
+
+    echo "Job Start at `date`"
+
+    readpath='/work/ebg_lab/eb/Lianchun/shotgun_2024Aug/filtered_raw_reads'
+    sourmashdb='/work/ebg_lab/referenceDatabases/Sourmash_GTDBr214/gtdb-rs214-k31.lca.json.gz'
+    gtdbtaxonomy='/work/ebg_lab/referenceDatabases/Sourmash_GTDBr214/gtdb-rs214.lineages.csv'
+    GTDBVERS=`echo $gtdbtaxonomy | rev | cut -d / -f 1 | rev | cut -d . -f 1`
+
+    output_dir='/work/ebg_lab/eb/Lianchun/shotgun_2024Aug/sourmash_results'
+    mkdir -p ${output_dir}
+
+
+
+    for READ1 in ${readpath}/*_R1.fastq
+    do
+
+        READ2="${READ1/_R1/_R2}"
+
+        filename=${READ1##*/}
+        readname=${filename%%_R1.fastq}
+
+        REF="${output_dir}/${readname}"
+
+
+        if [ ! -f ${REF}.sig ]; then
+            echo "Creating ${REF}.sig in: `pwd`"
+            cat ${READ1} ${READ2} | sourmash sketch dna -p scaled=1000,k=31,abund /dev/stdin -o ${REF}.sig
+        fi
+
+        sourmash gather -k 31 ${REF}.sig \
+        ${sourmashdb} \
+        -o ${REF}_x_${GTDBVERS}.gather.csv
+
+        sourmash tax metagenome --gather-csv ${REF}_x_${GTDBVERS}.gather.csv \
+        --taxonomy ${gtdbtaxonomy} \
+        --output-format krona --rank species -o ${REF}_x_${GTDBVERS}.krona.csv
+
+    done
+
+    echo "Job end with $? at: `date`"
+
     
 </details>
 
