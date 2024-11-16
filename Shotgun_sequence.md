@@ -169,7 +169,7 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
     #SBATCH --ntasks=1
     #SBATCH --cpus-per-task=32
     #SBATCH --mem=50G
-    #SBATCH --time=168:00:00       # processing 20 paired-end Illumina reads spends 2.5 days
+    #SBATCH --time=168:00:00       # processing 20 paired-end Illumina reads spends 3 days
     #SBATCH --mail-user=lianchun.yi1@ucalgary.ca
     #SBATCH --mail-type=ALL
     pwd; hostname; date
@@ -215,6 +215,9 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
     done
 
     echo "Job end with $? at: `date`"
+
+Download the *.gather.csv files to the D:\OneDrive - University of Calgary\Exp_Sediment\Experiments\Molecular_biology\2024_Aug\sourmash and run **sourmash_rela_abun.py**.
+This will generate sourmash_rela_abun.xlsx with 3 sheets.
 
     
 </details>
