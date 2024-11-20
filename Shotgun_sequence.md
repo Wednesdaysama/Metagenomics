@@ -153,12 +153,12 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 <details>
 <summary>
     
-#### 3. Generating taxonomic results - [sourmash](https://github.com/sourmash-bio/sourmash) </summary>
+#### 3. Generating taxonomic results - [sourmash](https://github.com/sourmash-bio/sourmash) or [SingleM](https://wwood.github.io/singlem/Installation)</summary>
 ##### Installation
 
-    mamba create -n sourmash_env -c conda-forge sourmash-minimal
-    mamba activate sourmash_env
-    sourmash --help
+    mamba create -c bioconda -c conda-forge --name singlem singlem'>='0.18.3
+    mamba activate singlem
+    singlem --help
 
 ##### Slurm - sourmash.slurm
 
