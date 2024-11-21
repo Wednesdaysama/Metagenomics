@@ -153,76 +153,67 @@ The name of the output file is Li491xx_**clean**_Rx.fastq.gz.
 <details>
 <summary>
     
-#### 3. Generating taxonomic results - [sourmash](https://github.com/sourmash-bio/sourmash) or [SingleM](https://wwood.github.io/singlem/Installation)</summary>
+#### 3. Generating taxonomic results - [SingleM](https://wwood.github.io/singlem/Installation)</summary>
 ##### Installation
 
     mamba create -c bioconda -c conda-forge --name singlem singlem'>='0.18.3
     mamba activate singlem
     singlem --help
 
-##### Slurm - sourmash.slurm
+##### Slurm - singlem_pipe.slurm
 
     #!/bin/bash
-    #SBATCH --job-name=sourmash
+    #SBATCH --job-name=singlem
     #SBATCH --output=%x.log
     #SBATCH --nodes=1
     #SBATCH --ntasks=1
-    #SBATCH --cpus-per-task=32
+    #SBATCH --cpus-per-task=16
     #SBATCH --mem=50G
-    #SBATCH --time=168:00:00       # processing 20 paired-end Illumina reads spends 3 days
+    #SBATCH --time=48:00:00       # processing 20 paired-end Illumina reads spends 1.5 days
     #SBATCH --mail-user=lianchun.yi1@ucalgary.ca
     #SBATCH --mail-type=ALL
     pwd; hostname; date
 
-    mamba activate sourmash_env
+    mamba activate singlem
+    input_dir="/work/ebg_lab/eb/Lianchun/shotgun_2024Aug/filtered_raw_reads"
+    output_dir="/work/ebg_lab/eb/Lianchun/shotgun_2024Aug/singlem_results"
 
-    echo "Job Start at `date`"
-
-    readpath='/work/ebg_lab/eb/Lianchun/shotgun_2024Aug/filtered_raw_reads'
-    sourmashdb='/work/ebg_lab/referenceDatabases/Sourmash_GTDBr214/gtdb-rs214-k31.lca.json.gz'
-    gtdbtaxonomy='/work/ebg_lab/referenceDatabases/Sourmash_GTDBr214/gtdb-rs214.lineages.csv'
-    GTDBVERS=`echo $gtdbtaxonomy | rev | cut -d / -f 1 | rev | cut -d . -f 1`
-
-    output_dir='/work/ebg_lab/eb/Lianchun/shotgun_2024Aug/sourmash_results'
-    mkdir -p ${output_dir}
-
-
-
-    for READ1 in ${readpath}/*_R1.fastq
-    do
-
-        READ2="${READ1/_R1/_R2}"
-
-        filename=${READ1##*/}
-        readname=${filename%%_R1.fastq}
-
-        REF="${output_dir}/${readname}"
-
-
-        if [ ! -f ${REF}.sig ]; then
-            echo "Creating ${REF}.sig in: `pwd`"
-            cat ${READ1} ${READ2} | sourmash sketch dna -p scaled=1000,k=31,abund /dev/stdin -o ${REF}.sig
-        fi
-
-        sourmash gather -k 31 ${REF}.sig \
-        ${sourmashdb} \
-        -o ${REF}_x_${GTDBVERS}.gather.csv
-
-        sourmash tax metagenome --gather-csv ${REF}_x_${GTDBVERS}.gather.csv \
-        --taxonomy ${gtdbtaxonomy} \
-        --output-format krona --rank species -o ${REF}_x_${GTDBVERS}.krona.csv
-
+    for R1 in ${input_dir}/*_R1.fastq; do
+        base_name=$(basename ${R1} _R1.fastq)
+        R2="${input_dir}/${base_name}_R2.fastq" output_file="${output_dir}/${base_name}.profile.tsv"
+        singlem pipe -1 ${R1} -2 ${R2} -p ${output_file}
     done
 
-    echo "Job end with $? at: `date`"
+Go to the output_dir and run **with_extras.slurm**
 
-Download the *.gather.csv files to the D:\OneDrive - University of Calgary\Exp_Sediment\Experiments\Molecular_biology\2024_Aug\sourmash and run **sourmash_rela_abun.py**.
-This will generate sourmash_rela_abun.xlsx with 3 sheets.
+##### Slurm - with_extras.slurm
+
+    #!/bin/bash
+    #SBATCH --job-name=sum_singlem
+    #SBATCH --output=%x.log
+    #SBATCH --nodes=1
+    #SBATCH --ntasks=1
+    #SBATCH --cpus-per-task=16
+    #SBATCH --mem=50G
+    #SBATCH --time=01:00:00       # processing 10 files spends 10 min
+    #SBATCH --mail-user=lianchun.yi1@ucalgary.ca
+    #SBATCH --mail-type=ALL
+    pwd; hostname; date
+
+    mamba activate singlem
+
+    input_dir="/work/ebg_lab/eb/overwinter/Lianchun/shotgun_2024Aug/singlem_results"
+
+    for file in "$input_dir"/*.profile.tsv; do
+        filename=$(basename "$file")
+        output_file="${input_dir}/${filename%}.with_extras.tsv"
+        singlem summarise --input-taxonomic-profile "$file" --output-taxonomic-profile-with-extras "$output_file"
+    done
 
     
 </details>
 
-
+Download all *.with_extras.tsv to local laptop and run **SingleM_rela_abun.py**. This calculates relative abundance and generates sheets for plotting.
 
 <details>
 <summary>
