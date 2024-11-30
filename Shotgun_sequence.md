@@ -210,7 +210,7 @@ Go to the output_dir and run **with_extras.slurm**
         singlem summarise --input-taxonomic-profile "$file" --output-taxonomic-profile-with-extras "$output_file"
     done
 
-Download all *.with_extras.tsv to local laptop and run **SingleM_rela_abun.py**. This calculates relative abundance and generates sheets for plotting.
+Download all *.with_extras.tsv to local laptop and run **SingleM_rela_abun.py**. This calculates the genus-level relative abundance and generates sheets for bubble and NMDS plot.
 
 </details>
 
